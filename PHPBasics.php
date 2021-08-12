@@ -124,7 +124,7 @@ print("#####q13#####".PHP_EOL);
 //Q13. 次の $user_data に，$update_data の内容を反映させ，$user_data の内容を書き換え，出力して下さい。
 $user_data = ["name" => "神里", "age" => 31, "address" => "埼玉"];
 $update_data = ["age" => 32, "address" => "沖縄"];
-$user_data =$user_data + $update_data;
+$user_data =array_merge($user_data, $update_data);
 
 print_r($user_data);
 
@@ -175,4 +175,146 @@ $users = [
 
 echo PHP_EOL;
 
+print("#####q17#####".PHP_EOL);
+//## Q17. 次の Userクラス 内にinfoメソッドを追加し，期待する出力結果になるようにして下さい。s
+//クラス生成
+class User
+{
+    //変数宣言
+    private $name;
+    private $age;
+    private $gender;
+
+    //コンストラクタ（初期設定？）
+    public function user($user_name,$user_age,$user_gender){
+        $this->name =$user_name;
+        $this->age = $user_age;
+        $this->gender =$user_gender;
+    }
+
+    //出力
+    function info(){
+        print("名前:".$this->name.PHP_EOL);
+        print("年齢:".$this->age.PHP_EOL);
+        print("性別:".$this->gender.PHP_EOL);
+    }
+
+}
+
+$user1 = new User("神里", 32, "男");
+$user2 = new User("あじー", 32, "男");
+
+$user1->info();
+print("-------------".PHP_EOL);
+$user2->info();
+
+echo PHP_EOL;
+
+print("#####q18#####".PHP_EOL);
+//Q18. 年齢を用いた場合分けを利用して、期待する出力結果になるようなManクラスを作成して下さい。
+//クラス生成
+class Man
+{
+    //変数宣言
+    private $name;
+    private $age;
+
+    //コンストラクタ
+   public function __construct($user_name, $user_age) {
+        $this->name = $user_name;
+        $this->age = $user_age;
+    }
+
+    //出力
+    function introduce() {
+        if ($this->age > 10) {
+            print("こんにちは,".$this->name."と申します。宜しくお願いいたします。".PHP_EOL);
+        } else {
+            print("はいさいまいど〜、".$this->name."です！！！".PHP_EOL);
+        }
+    }
+
+}
+
+$man1 = new Man("あじー", 32);
+$man2 = new Man("ゆたぼん", 10);
+$man1->introduce();
+$man2->introduce();
+
+echo PHP_EOL;
+
+print("#####q19#####".PHP_EOL);
+//Q19. 次のコードはエラーが出ます。期待する出力結果となるようにコードを修正して下さい。
+//クラスの生成
+class Item
+{
+    //変数定義
+    public $name; 
+
+    //コンストラクタ
+    function __construct($book_name) {
+        $this->name = $book_name;
+    }
+}
+
+
+$book = new Item("ゼロ秒思考");
+print($book->name.PHP_EOL);
+
+echo PHP_EOL;
+
+print("#####q20#####".PHP_EOL);
+//Q20. 次の仕様を満たした上で，期待する出力結果になるようにコードを追加して下さい。
+//クラス生成
+class Human
+ {
+     public $name;
+     public $age;
+
+     function __construct($human_name,$human_age){
+         $this->name = $human_name;
+         $this->age = $human_age;
+
+     }
+
+ }
+//クラス生成
+ class Zoo
+ {
+     private $name;
+     private $entry_fee;
+
+     function __construct($zoo_name,$zoo_entry_fee){
+         $this->name = $zoo_name;
+         $this->entry_fee = $zoo_entry_fee;
+     }
+
+     function entry_fee(Human $human) { 
+        if ($human->age <= 5) {
+            print($human->name."さんの入場料金は ".$this->entry_fee["infant"]." 円です。".PHP_EOL);
+        } elseif ($human->age <= 12) {
+            print($human->name."さんの入場料金は ".$this->entry_fee["children"]." 円です。".PHP_EOL);
+        } elseif ($human->age <= 64) {
+            print($human->name."さんの入場料金は ".$this->entry_fee["adult"]." 円です。".PHP_EOL);
+        } elseif ($human->age <= 120) {
+            print($human->name."さんの入場料金は ".$this->entry_fee["senior"]." 円です。".PHP_EOL);
+        }
+    }
+
+ }
+
+
+$zoo = new Zoo("旭山動物園",["infant" => 0, "children" => 400, "adult" => 800, "senior" => 500]);
+$human1 = new Human("たま", 3);
+$human2 = new Human("ゆたぼん", 10);
+$human3 = new Human("あじー", 32);
+$human4 = new Human("ぎん", 108);
+ $humans = [$human1, $human2, $human3, $human4];
+
+ foreach($humans as $human){
+   $zoo->entry_fee($human);
+ }
+
+ echo PHP_EOL;
 ?>
+
